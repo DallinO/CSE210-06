@@ -29,7 +29,7 @@ namespace Unit05.Game.Casting
                 }
                 
                 alien.SetText("<V>");
-                alien.SetColor(Color.GREEN);
+                alien.SetColor(new Color(0, 255, 0));
                 alien.SetVelocity(new Point(0, 5));
                 this.AlienList.Add(alien);
             }

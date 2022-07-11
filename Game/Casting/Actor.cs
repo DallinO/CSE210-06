@@ -8,7 +8,7 @@ namespace Unit05.Game.Casting
     {
         private string text = "";
         private int fontSize = Constants.FONT_SIZE;
-        Raylib_cs.Color color = Raylib_cs.Color.SKYBLUE;
+        Color color = Constants.WHITE;
         private Point position = new Point(0, 0);
         private Point velocity = new Point(0, 0);
 

@@ -57,7 +57,8 @@ namespace Unit05.Game.Services
             int x = actor.GetPosition().GetX();
             int y = actor.GetPosition().GetY();
             int fontSize = actor.GetFontSize();
-            Raylib_cs.Color color = actor.GetColor();
+            Casting.Color c = actor.GetColor();
+            Raylib_cs.Color color = ToRaylibColor(c);
             Raylib.DrawText(text, x, y, fontSize, color);
         }
 
@@ -113,6 +114,15 @@ namespace Unit05.Game.Services
             {
                 Raylib.DrawLine(0, y, Constants.MAX_X, y, Raylib_cs.Color.GRAY);
             }
+        }
+
+        private Raylib_cs.Color ToRaylibColor(Casting.Color color)
+        {
+            int r = color.GetRed();
+            int g = color.GetGreen();
+            int b = color.GetBlue();
+            int a = color.GetAlpha();
+            return new Raylib_cs.Color(r, g, b, a);
         }
 
     }

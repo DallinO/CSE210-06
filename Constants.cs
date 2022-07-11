@@ -1,5 +1,6 @@
 using System;
 using Microsoft.VisualBasic;
+using Unit05.Game.Casting;
 
 namespace Unit05.Game
 {
@@ -20,7 +21,11 @@ namespace Unit05.Game
         public static int FRAME_RATE = 30;
         public static int FONT_SIZE = 30;
         public static string CAPTION = "SPACE INVADERS";
-        public static int SNAKE_LENGTH = 16;
+
+        public static Color RED = new Color(255, 0, 0);
+        public static Color WHITE = new Color(255, 255, 255);
+        public static Color YELLOW = new Color(255, 255, 0);
+        public static Color GREEN = new Color(0, 255, 0);
 
     }
 }

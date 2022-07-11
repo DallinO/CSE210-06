@@ -11,18 +11,16 @@ namespace Unit05.Game.Casting
         List<Actor> LiveRounds = new List<Actor>();
         public Bullet()
         {
-
         }
-
 
         public void AddBullet(Player player, bool roundFired)
         {
             Bullet bullet = new Bullet();
-                bullet.SetText("*");
-                bullet.SetPosition(player.GetPosition());
-                bullet.SetVelocity(new Point(0, -15));
-                bullet.SetColor(Raylib_cs.Color.RED);
-                LiveRounds.Add(bullet);
+            bullet.SetText("|");
+            bullet.SetPosition(player.GetPosition());
+            bullet.SetVelocity(new Point(0, -15));
+            bullet.SetColor(Constants.RED);
+            LiveRounds.Add(bullet);
         }
 
         public void RemoveBullet(List<Actor> roundList)

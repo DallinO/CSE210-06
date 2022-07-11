@@ -4,7 +4,6 @@ using Unit05.Game.Casting;
 using Unit05.Game.Scripting;
 using System.Collections.Generic;
 using Unit05.Game;
-using Raylib_cs;
 
 
 
@@ -22,14 +21,15 @@ namespace Unit05
             cast.AddActor("Player", new Player());
             Player player = (Player)cast.GetFirstActor("Player");
             player.SetPosition(new Point(435, 570));
-            player.SetColor(Raylib_cs.Color.GREEN);
+            player.SetColor(new Color(0, 255, 0));
             player.SetText("<^>" );
             // Creat Aliens
-            cast.AddActor("Aliens", new Alien());
+            cast.AddActor("Aliens", new KillList());
             // Create Time Display
             cast.AddActor("Time", new Time());
             Actor time = cast.GetFirstActor("Time");
             time.SetPosition(new Point(800, 15));
+            time.SetColor(Constants.WHITE);
             // Create Bullet
             cast.AddActor("Bullet", new Bullet());
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
@@ -42,6 +42,7 @@ namespace Unit05
             script.AddAction("update", new MoveActorsAction());
             script.AddAction("update", new UpdateTimeAction());
             script.AddAction("update", new HandleBulletCollision());
+            script.AddAction("update", new ExecuteKillList());
             script.AddAction("output", new DrawActorsAction(videoService));
 
             Director director = new Director(videoService);
