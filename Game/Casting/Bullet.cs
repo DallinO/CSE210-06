@@ -16,8 +16,8 @@ namespace Unit05.Game.Casting
             Bullet bullet = new Bullet();
             bullet.SetText("*");
             bullet.SetPosition(player.GetPosition());
-            bullet.SetVelocity(new Point(0, 15));
-            bullet.SetColor(Raylib_cs.Color.GREEN);
+            bullet.SetVelocity(new Point(0, -15));
+            bullet.SetColor(Raylib_cs.Color.RED);
             LiveRounds.Add(bullet);
         }
 
