@@ -13,14 +13,15 @@ namespace Unit05.Game.Scripting
     public class ControlActorsAction : Action
     {
         private KeyboardService keyboardService;
-        private Point direction = new Point(-Constants.CELL_SIZE, 0);
+        private Point direction;
 
         /// <summary>
         /// Constructs a new instance of ControlActorsAction using the given KeyboardService.
         /// </summary>
-        public ControlActorsAction(KeyboardService keyboardService)
+        public ControlActorsAction(KeyboardService keyboardService, Player player)
         {
             this.keyboardService = keyboardService;
+            this.direction = player.GetPosition();
         }
 
         /// <inheritdoc/>
@@ -29,13 +30,13 @@ namespace Unit05.Game.Scripting
             // left
             if (keyboardService.IsKeyDown("left"))
             {
-                direction = new Point(-Constants.CELL_SIZE, 0);
+                direction = new Point(direction.GetX() - Constants.CELL_SIZE, direction.GetY());
             }
 
             // right
             if (keyboardService.IsKeyDown("right"))
             {
-                direction = new Point(Constants.CELL_SIZE, 0);
+                direction = new Point(direction.GetX() + Constants.CELL_SIZE, direction.GetY());
             }
 
             Player player = (Player)cast.GetFirstActor("Player");
