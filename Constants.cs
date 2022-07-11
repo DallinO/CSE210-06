@@ -17,9 +17,9 @@ namespace Unit05.Game
         public static int MAX_X = 900;
         public static int MAX_Y = 600;
 
-        public static int FRAME_RATE = 60;
-        public static int FONT_SIZE = 15;
-        public static string CAPTION = "TRON";
+        public static int FRAME_RATE = 30;
+        public static int FONT_SIZE = 30;
+        public static string CAPTION = "SPACE INVADERS";
         public static int SNAKE_LENGTH = 16;
 
     }
