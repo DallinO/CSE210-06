@@ -24,8 +24,15 @@ namespace Unit05
             player.SetPosition(new Point(435, 570));
             player.SetColor(Raylib_cs.Color.GREEN);
             player.SetText("<^>" );
+            // Creat Aliens
+            cast.AddActor("Aliens", new Alien());
+            // Create Time Display
+            cast.AddActor("Time", new Time());
+            Actor time = cast.GetFirstActor("Time");
+            time.SetPosition(new Point(800, 15));
             // Create Bullet
             cast.AddActor("Bullet", new Bullet());
+            Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
 
             KeyboardService keyboardService = new KeyboardService();
             VideoService videoService = new VideoService(false);
@@ -33,7 +40,8 @@ namespace Unit05
             Script script = new Script();
             script.AddAction("input", new ControlActorsAction(keyboardService, player));
             script.AddAction("update", new MoveActorsAction());
-            //script.AddAction("update", new HandleCollisionsAction());
+            script.AddAction("update", new UpdateTimeAction());
+            script.AddAction("update", new HandleBulletCollision());
             script.AddAction("output", new DrawActorsAction(videoService));
 
             Director director = new Director(videoService);

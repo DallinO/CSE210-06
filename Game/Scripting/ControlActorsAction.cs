@@ -28,6 +28,7 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
+            bool roundFired = true;
 
             // left
             if (keyboardService.IsKeyDown("left"))
@@ -46,9 +47,8 @@ namespace Unit05.Game.Scripting
 
             if (keyboardService.IsKeyDown("space"))
             {
-                bullet.AddBullet(player);
+                bullet.AddBullet(player, roundFired);
             }
-
         }
     }
 }

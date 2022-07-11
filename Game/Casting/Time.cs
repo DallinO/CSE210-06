@@ -3,12 +3,11 @@ using Raylib_cs;
 
 namespace Unit05.Game.Casting
 {
-    public class Player : Actor
+    public class Time : Actor
     {
-        public Player()
+        public Time()
         {
         }
-
     }
 
 }

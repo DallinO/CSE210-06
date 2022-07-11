@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Unit05.Game.Casting;
 using Unit05.Game.Services;
-using System;
 using Raylib_cs;
+using System;
 
 
 namespace Unit05.Game.Scripting
@@ -13,39 +13,32 @@ namespace Unit05.Game.Scripting
     /// The responsibility of MoveActorsAction is to move all the actors.
     /// </para>
     /// </summary>
-    public class MoveActorsAction : Action
+    public class HandleBulletCollision : Action
     {
         /// <summary>
         /// Constructs a new instance of MoveActorsAction.
         /// </summary>
-        public MoveActorsAction()
+        public HandleBulletCollision()
         {
         }
 
         /// <inheritdoc/>
         public void Execute(Cast cast, Script script)
         {
-            List<Actor> actors = cast.GetAllActors();
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
-            List<Actor> liveRounds = bullet.GetLiveRounds();
+            List<Actor> roundList = bullet.GetLiveRounds();
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
             List<Actor> alienList = aliens.GetAlienList();
-            foreach (Actor actor in actors)
-            {
-                actor.MoveNext();
-            }
-            foreach (Actor round in liveRounds)
-            {
-                round.MoveNext();
-            }
+
             foreach (Actor alien in alienList)
             {
-                double elapsedTime = Math.Round(Raylib.GetTime(), 1);
-                if (elapsedTime % 1 == 0)
+                foreach (Actor round in roundList)
                 {
-                    alien.MoveNext();
+                    if (alien.GetPosition().Equals(round.GetPosition()))
+                    {
+                        alien.SetText("");
+                    }
                 }
-                
             }
         }
     }
