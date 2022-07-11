@@ -22,6 +22,7 @@ namespace Unit05.Game.Services
         {
             keys["left"] = KeyboardKey.KEY_LEFT;
             keys["right"] = KeyboardKey.KEY_RIGHT;
+            keys["space"] = KeyboardKey.KEY_SPACE;
         }
 
         /// <summary>

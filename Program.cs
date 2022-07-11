@@ -18,11 +18,14 @@ namespace Unit05
         static void Main(string[] args)
         {
             Cast cast = new Cast();
+            // Create Player
             cast.AddActor("Player", new Player());
             Player player = (Player)cast.GetFirstActor("Player");
             player.SetPosition(new Point(435, 570));
             player.SetColor(Raylib_cs.Color.GREEN);
             player.SetText("<^>" );
+            // Create Bullet
+            cast.AddActor("Bullet", new Bullet());
 
             KeyboardService keyboardService = new KeyboardService();
             VideoService videoService = new VideoService(false);

@@ -25,10 +25,13 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             Player player = (Player)cast.GetFirstActor("Player");
+            Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
+            List<Actor> liveRounds = bullet.GetLiveRounds();
 
             videoService.ClearBuffer();
             videoService.DrawActor(player);
+            videoService.DrawActors(liveRounds);
             videoService.FlushBuffer();
         }
-    }
+    } 
 }

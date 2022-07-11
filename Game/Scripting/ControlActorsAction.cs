@@ -27,6 +27,8 @@ namespace Unit05.Game.Scripting
         /// <inheritdoc/>
         public void Execute(Cast cast, Script script)
         {
+            Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
+
             // left
             if (keyboardService.IsKeyDown("left"))
             {
@@ -41,6 +43,11 @@ namespace Unit05.Game.Scripting
 
             Player player = (Player)cast.GetFirstActor("Player");
             player.SetPosition(direction);
+
+            if (keyboardService.IsKeyDown("space"))
+            {
+                bullet.AddBullet(player);
+            }
 
         }
     }

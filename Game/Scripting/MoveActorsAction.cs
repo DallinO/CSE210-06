@@ -24,9 +24,15 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             List<Actor> actors = cast.GetAllActors();
+            Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
+            List<Actor> liveRounds = bullet.GetLiveRounds();
             foreach (Actor actor in actors)
             {
                 actor.MoveNext();
+            }
+            foreach (Actor round in liveRounds)
+            {
+                round.MoveNext();
             }
         }
     }
