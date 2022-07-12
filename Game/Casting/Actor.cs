@@ -14,7 +14,6 @@ namespace Unit05.Game.Casting
 
         public Actor()
         {
-
         }
 
         public virtual void MoveNext()

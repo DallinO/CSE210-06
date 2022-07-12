@@ -1,5 +1,8 @@
 using Unit05.Game.Casting;
 using Unit05.Game.Services;
+using Raylib_cs;
+using System.Collections.Generic;
+using System;
 
 
 namespace Unit05.Game.Scripting
@@ -28,8 +31,7 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
-            bool roundFired = true;
-
+            double currentTime = Math.Round(Raylib.GetTime(), 1);
             // left
             if (keyboardService.IsKeyDown("left"))
             {
@@ -47,7 +49,11 @@ namespace Unit05.Game.Scripting
 
             if (keyboardService.IsKeyDown("space"))
             {
-                bullet.AddBullet(player, roundFired);
+
+                if (currentTime % 1 == 0)
+                {
+                    bullet.AddPlayerBullet(player);
+                }
             }
         }
     }

@@ -41,7 +41,7 @@ namespace Unit05.Game.Scripting
             foreach (Actor alien in alienList)
             {
                 double elapsedTime = Math.Round(Raylib.GetTime(), 1);
-                if (elapsedTime % 1 == 0)
+                if (elapsedTime % 2 == 0)
                 {
                     alien.MoveNext();
                 }

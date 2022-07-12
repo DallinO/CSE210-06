@@ -25,22 +25,18 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
-            List<Actor> roundList = bullet.GetLiveRounds();
-            KillList aliens = (KillList)cast.GetFirstActor("Aliens");
+            List<Actor> liveRounds = bullet.GetLiveRounds();
+            List<int> deadRounds = bullet.GetDeadRounds();
+            Alien aliens = (Alien)cast.GetFirstActor("Aliens");
             List<Actor> alienList = aliens.GetAlienList();
             List<int> killList = aliens.GetKillList();
-            int alienListLength = 0;
+            Score score = (Score)cast.GetFirstActor("Score");
 
             foreach (Actor alien in alienList)
             {
-                alienListLength = alienListLength + 1;
-            }
-
-            for(int i = 0; i < alienListLength; i++)
-            {
-                foreach (Actor round in roundList)
+                foreach (Actor round in liveRounds)
                 {
-                    Point alienPosition = alienList[i].GetPosition();
+                    Point alienPosition = alien.GetPosition();
                     int apx = alienPosition.GetX();
                     int apy = alienPosition.GetY();
 
@@ -48,30 +44,20 @@ namespace Unit05.Game.Scripting
                     int rpx = roundPosition.GetX();
                     int rpy = roundPosition.GetY();
 
-                    if ((rpx >= apx && rpx <= apx + 30) && (rpy >= apy && rpy <= apy + 30))
+                    if ((rpx >= apx && rpx <= apx + 15) && (rpy >= apy && rpy <= apy + 15))
                     {
-                        Color alienColor = alienList[i].GetColor();
-                        int r = alienColor.GetRed();
-                        int g = alienColor.GetGreen();
-                        int b = alienColor.GetBlue();
+                        score.AddPoint(100);
+                        alien.SetText("");
+                        alien.SetPosition(Constants.graveyard);
+                        alien.SetVelocity(new Point(0, 0));
 
-                        if(g == 255)
-                        {
-                            if(r == 255)
-                            {
-                                alienList[i].SetColor(Constants.RED);
-                            }
-                            else
-                            {
-                                alienList[i].SetColor(Constants.YELLOW);
-                            }
-                        }
-                        else
-                        {
-                            killList.Add(i);
-                        }
+                        round.SetPosition(Constants.spentCasings);
+                        round.SetVelocity(new Point(0, 0));
+
                     }
+                    
                 }
+
             }
         }
     }

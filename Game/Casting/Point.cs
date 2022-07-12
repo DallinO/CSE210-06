@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using Unit05.Game.Casting;
-using Raylib_cs;
-
 namespace Unit05.Game.Casting
 {
     public class Point

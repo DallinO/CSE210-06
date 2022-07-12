@@ -1,9 +1,4 @@
-using System.Collections.Generic;
 using Unit05.Game.Casting;
-using Unit05.Game.Services;
-using Raylib_cs;
-using System;
-
 
 namespace Unit05.Game.Scripting
 {
@@ -13,21 +8,21 @@ namespace Unit05.Game.Scripting
     /// The responsibility of MoveActorsAction is to move all the actors.
     /// </para>
     /// </summary>
-    public class UpdateTimeAction : Action
+    public class UpdateScoreAction : Action
     {
         /// <summary>
         /// Constructs a new instance of MoveActorsAction.
         /// </summary>
-        public UpdateTimeAction()
+        public UpdateScoreAction()
         {
         }
 
         /// <inheritdoc/>
         public void Execute(Cast cast, Script script)
-        {
-            Actor time = (Actor)cast.GetFirstActor("Time");
-            double elapsedTime = Math.Round(Raylib.GetTime(), 3);
-            time.SetText(elapsedTime.ToString());
+        {  
+            Score score = (Score)cast.GetFirstActor("Score");
+            int points = score.GetScore();
+            score.SetText("SCORE: " + points);
         }
     }
 }

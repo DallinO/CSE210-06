@@ -27,7 +27,8 @@ namespace Unit05.Game.Scripting
             Player player = (Player)cast.GetFirstActor("Player");
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
-            Time time = (Time)cast.GetFirstActor("Time");
+            Actor time = (Actor)cast.GetFirstActor("Time");
+            Actor score = (Actor)cast.GetFirstActor("Score");
             List<Actor> liveRounds = bullet.GetLiveRounds();
             List<Actor> alienList = aliens.GetAlienList();
 
@@ -36,6 +37,7 @@ namespace Unit05.Game.Scripting
             videoService.DrawActor(player);
             videoService.DrawActors(liveRounds);
             videoService.DrawActors(alienList);
+            videoService.DrawActor(score);
             videoService.DrawActor(time);
             videoService.FlushBuffer();                                                                
         }
