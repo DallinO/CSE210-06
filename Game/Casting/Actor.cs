@@ -73,5 +73,4 @@ namespace Unit05.Game.Casting
             return velocity;
         }
     }
-
 }

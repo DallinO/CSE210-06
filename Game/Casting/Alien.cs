@@ -5,8 +5,8 @@ namespace Unit05.Game.Casting
 {
     public class Alien : Actor
     {
-        List<Actor> AlienList = new List<Actor>();
-        List<int> killList = new List<int>();
+        List<Actor> alienList = new List<Actor>();
+        int alienAmount = 32;
         public Alien()
         {
             AddAliens();
@@ -46,22 +46,24 @@ namespace Unit05.Game.Casting
                     alien.SetText("<v>");
                     alien.SetColor(Constants.RED);
                 }
-                
-                alien.SetVelocity(new Point(0, 5));
-                this.AlienList.Add(alien);
+                alienList.Add(alien);
             }
 
         }
 
         public List<Actor> GetAlienList()
         {
-            return AlienList;
+            return alienList;
         }
 
-        public List<int> GetKillList()
+        public void SetAlienAmount(int input)
+        {   
+            alienAmount = alienAmount - input;
+        }
+
+        public int GetAlienAmount()
         {
-            return killList;
+            return alienAmount;
         }
     }
-
 }

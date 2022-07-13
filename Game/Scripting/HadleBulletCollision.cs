@@ -12,11 +12,10 @@ namespace Unit05.Game.Scripting
     /// The responsibility of MoveActorsAction is to move all the actors.
     /// </para>
     /// </summary>
-    public class HandleBulletCollision : Action
+    public class HandleBulletCollision : Operation
     {
-        /// <summary>
-        /// Constructs a new instance of MoveActorsAction.
-        /// </summary>
+        List<Actor> removeAliens = new List<Actor>();
+        List<Actor> removeBullets = new List<Actor>();
         public HandleBulletCollision()
         {
         }
@@ -24,18 +23,19 @@ namespace Unit05.Game.Scripting
         /// <inheritdoc/>
         public void Execute(Cast cast, Script script)
         {
+            Player player = (Player)cast.GetFirstActor("Player");
+            Point playerPosition = player.GetPosition();
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
             List<Actor> liveRounds = bullet.GetLiveRounds();
-            List<int> deadRounds = bullet.GetDeadRounds();
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
             List<Actor> alienList = aliens.GetAlienList();
-            List<int> killList = aliens.GetKillList();
             Score score = (Score)cast.GetFirstActor("Score");
 
             foreach (Actor alien in alienList)
             {
                 foreach (Actor round in liveRounds)
                 {
+                    Color bulletType = round.GetColor();
                     Point alienPosition = alien.GetPosition();
                     int apx = alienPosition.GetX();
                     int apy = alienPosition.GetY();
@@ -44,21 +44,47 @@ namespace Unit05.Game.Scripting
                     int rpx = roundPosition.GetX();
                     int rpy = roundPosition.GetY();
 
-                    if ((rpx >= apx && rpx <= apx + 15) && (rpy >= apy && rpy <= apy + 15))
+                    if ((rpx >= apx && rpx <= apx + 30) && (rpy >= apy && rpy <= apy) && bulletType == Constants.BLUE)
                     {
+                        removeAliens.Add(alien);
+                        removeBullets.Add(round);
                         score.AddPoint(100);
-                        alien.SetText("");
-                        alien.SetPosition(Constants.graveyard);
-                        alien.SetVelocity(new Point(0, 0));
-
-                        round.SetPosition(Constants.spentCasings);
-                        round.SetVelocity(new Point(0, 0));
-
                     }
-                    
-                }
 
+                    if (rpy > 585 || rpy < 15)
+                    {
+                        removeBullets.Add(round);
+                    }
+                }
             }
+
+            foreach (Actor round in liveRounds)
+            {
+                Color bulletType = round.GetColor();
+                Point roundPosition = round.GetPosition();
+                int rpx = roundPosition.GetX();
+                int rpy = roundPosition.GetY();
+                int ppx = playerPosition.GetX();
+                int ppy = playerPosition.GetY();
+
+                if ((rpx >= ppx && rpx <= ppx + 30) && (rpy >= ppy && rpy <= ppy + 15) && bulletType == Constants.RED)
+                {
+                    player.SetLives(1);
+                    removeBullets.Add(round);
+                }
+            }
+
+
+            foreach (Actor alien in removeAliens)
+            {
+                alienList.Remove(alien);
+                aliens.SetAlienAmount(1);
+            }
+            foreach (Actor round in removeBullets)
+            {
+                liveRounds.Remove(round);
+            }
+
         }
     }
 }

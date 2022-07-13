@@ -13,10 +13,11 @@ namespace Unit05.Game.Scripting
     /// The responsibility of ControlActorsAction is to get the direction and move the snake's head.
     /// </para>
     /// </summary>
-    public class ControlActorsAction : Action
+    public class ControlActorsAction : Operation
     {
         private KeyboardService keyboardService;
         private Point direction;
+        int iteration = 0;
 
         /// <summary>
         /// Constructs a new instance of ControlActorsAction using the given KeyboardService.
@@ -31,7 +32,9 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
-            double currentTime = Math.Round(Raylib.GetTime(), 1);
+            Alien aliens = (Alien)cast.GetFirstActor("Aliens");
+            List<Actor> alienList = aliens.GetAlienList();
+            int modulus = iteration % 90;
             // left
             if (keyboardService.IsKeyDown("left"))
             {
@@ -49,12 +52,27 @@ namespace Unit05.Game.Scripting
 
             if (keyboardService.IsKeyDown("space"))
             {
-
-                if (currentTime % 1 == 0)
-                {
-                    bullet.AddPlayerBullet(player);
-                }
+                bullet.AddPlayerBullet(player);
             }
+
+            foreach (Actor alien in alienList)
+            {
+                if (modulus == 60 || modulus == 120)
+                {
+                    alien.SetVelocity(new Point(15, 0));
+                }
+                if (modulus == 30 || modulus == 90)
+                {
+                    alien.SetVelocity(new Point(0, 15));
+                }
+                if (modulus == 0 || modulus == 150)
+                {
+                    alien.SetVelocity(new Point(-15, 0));
+                }
+
+            }
+
+            iteration++;
         }
     }
 }

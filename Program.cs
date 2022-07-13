@@ -18,46 +18,56 @@ namespace Unit05
         {
             Cast cast = new Cast();
 
-            // Create Player
+            // Create player.
             cast.AddActor("Player", new Player());
             Player player = (Player)cast.GetFirstActor("Player");
             player.SetPosition(new Point(435, 570));
             player.SetColor(Constants.WHITE);
             player.SetText("<^>" );
 
-            // Creat Aliens
+            // Creat aliens.
             cast.AddActor("Aliens", new Alien());
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
             List<Actor> alienList = aliens.GetAlienList();
         
-            // Create Time Display
-            cast.AddActor("Time", new Actor());
-            Actor time = cast.GetFirstActor("Time");
-            time.SetPosition(new Point(800, 15));
-            time.SetColor(Constants.WHITE);
+            // Create lives display.
+            cast.AddActor("Lives", new Actor());
+            Actor lives = cast.GetFirstActor("Lives");
+            lives.SetPosition(new Point(795, 15));
+            lives.SetColor(Constants.WHITE);
 
-            // Create Score
+            // Create score.
             cast.AddActor("Score", new Score());
             Score score = (Score)cast.GetFirstActor("Score");
             score.SetPosition(new Point(15, 15));
             score.SetText("SCORE: 0");
 
+            cast.AddActor("EndGame", new Actor());
+            Actor end = cast.GetFirstActor("EndGame");
+            end.SetPosition(new Point((Constants.MAX_X / 2) - 90, Constants.MAX_Y / 2));
+            end.SetColor(Constants.RED);
+            
 
-            // Create Bullet
+
+            // Create bullet.
             cast.AddActor("Bullet", new Bullet());
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
 
             KeyboardService keyboardService = new KeyboardService();
             VideoService videoService = new VideoService(false);
 
+            // Create scripts.
             Script script = new Script();
             script.AddAction("input", new ControlActorsAction(keyboardService, player));
             script.AddAction("update", new MoveActorsAction());
-            script.AddAction("update", new UpdateTimeAction());
+            script.AddAction("update", new UpdateLivesAction());
             script.AddAction("update", new UpdateScoreAction());
             script.AddAction("update", new HandleBulletCollision());
+            script.AddAction("update", new FireAlienBullet());
+            script.AddAction("update", new HandleGameOver());
             script.AddAction("output", new DrawActorsAction(videoService));
 
+            // Create Director and start game.
             Director director = new Director(videoService);
             director.StartGame(cast, script);
             

@@ -12,7 +12,7 @@ namespace Unit05.Game.Scripting
     /// </summary>
     public class Script
     {
-        private Dictionary<string, List<Action>> actions = new Dictionary<string, List<Action>>();
+        private Dictionary<string, List<Operation>> actions = new Dictionary<string, List<Operation>>();
 
         /// <summary>
         /// Constructs a new instance of Script.
@@ -26,11 +26,11 @@ namespace Unit05.Game.Scripting
         /// </summary>
         /// <param name="group">The group name.</param>
         /// <param name="action">The action to add.</param>
-        public void AddAction(string group, Action action)
+        public void AddAction(string group, Operation action)
         {
             if (!actions.ContainsKey(group))
             {
-                actions[group] = new List<Action>();
+                actions[group] = new List<Operation>();
             }
 
             if (!actions[group].Contains(action))
@@ -44,9 +44,9 @@ namespace Unit05.Game.Scripting
         /// </summary>
         /// <param name="group">The group name.</param>
         /// <returns>The list of actions.</returns>
-        public List<Action> GetActions(string group)
+        public List<Operation> GetActions(string group)
         {
-            List<Action> results = new List<Action>();
+            List<Operation> results = new List<Operation>();
             if (actions.ContainsKey(group))
             {
                 results.AddRange(actions[group]);
@@ -59,11 +59,11 @@ namespace Unit05.Game.Scripting
         /// </summary>
         /// <param name="group">The group name.</param>
         /// <param name="action">The action to remove.</param>
-        public void RemoveAction(string group, Action action)
+        public void RemoveAction(string group)
         {
             if (actions.ContainsKey(group))
             {
-                actions[group].Remove(action);
+                actions.Remove(group);
             }
         }
 

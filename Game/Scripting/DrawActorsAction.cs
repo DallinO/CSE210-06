@@ -9,7 +9,7 @@ namespace Unit05.Game.Scripting
     /// <para>An output action that draws all the actors.</para>
     /// <para>The responsibility of DrawActorsAction is to draw each of the actors.</para>
     /// </summary>
-    public class DrawActorsAction : Action
+    public class DrawActorsAction : Operation
     {
         private VideoService videoService;
 
@@ -27,8 +27,9 @@ namespace Unit05.Game.Scripting
             Player player = (Player)cast.GetFirstActor("Player");
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
-            Actor time = (Actor)cast.GetFirstActor("Time");
+            Actor lives = (Actor)cast.GetFirstActor("Lives");
             Actor score = (Actor)cast.GetFirstActor("Score");
+            Actor end = cast.GetFirstActor("EndGame");
             List<Actor> liveRounds = bullet.GetLiveRounds();
             List<Actor> alienList = aliens.GetAlienList();
 
@@ -38,7 +39,8 @@ namespace Unit05.Game.Scripting
             videoService.DrawActors(liveRounds);
             videoService.DrawActors(alienList);
             videoService.DrawActor(score);
-            videoService.DrawActor(time);
+            videoService.DrawActor(end);
+            videoService.DrawActor(lives);
             videoService.FlushBuffer();                                                                
         }
     } 

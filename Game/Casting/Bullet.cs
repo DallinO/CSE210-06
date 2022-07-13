@@ -9,7 +9,6 @@ namespace Unit05.Game.Casting
     class Bullet : Actor
     {
         List<Actor> liveRounds = new List<Actor>();
-        List<int> deadRounds = new List<int>();
         public Bullet()
         {
         }
@@ -17,7 +16,7 @@ namespace Unit05.Game.Casting
         public void AddPlayerBullet(Player player)
         {
             Bullet bullet = new Bullet();
-            bullet.SetText("|");
+            bullet.SetText(".");
             Point playerPosition = player.GetPosition();
             int playerX = playerPosition.GetX();
             int playerY = playerPosition.GetY();
@@ -30,8 +29,11 @@ namespace Unit05.Game.Casting
         public void AddAlienBullet(Actor alien)
         {
             Bullet bullet = new Bullet();
-            bullet.SetText("*");
-            bullet.SetPosition(alien.GetPosition());
+            bullet.SetText(".");
+            Point alienPosition = alien.GetPosition();
+            int alienX = alienPosition.GetX();
+            int alienY = alienPosition.GetY();
+            bullet.SetPosition(new Point((alienX + 15), alienY));
             bullet.SetVelocity(new Point(0, 15));
             bullet.SetColor(Constants.RED);
             liveRounds.Add(bullet);
@@ -53,11 +55,6 @@ namespace Unit05.Game.Casting
         public List<Actor> GetLiveRounds()
         {
             return liveRounds;
-        }
-
-        public List<int> GetDeadRounds()
-        {
-            return deadRounds;
         }
     }
 }
