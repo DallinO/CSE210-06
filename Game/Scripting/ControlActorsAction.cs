@@ -34,7 +34,10 @@ namespace Unit05.Game.Scripting
             Bullet bullet = (Bullet)cast.GetFirstActor("Bullet");
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
             List<Actor> alienList = aliens.GetAlienList();
-            int modulus = iteration % 90;
+            int modulus = iteration % 180;
+            bool safetyOne = false;
+            bool safetyTwo = false;
+
             // left
             if (keyboardService.IsKeyDown("left"))
             {
@@ -52,22 +55,36 @@ namespace Unit05.Game.Scripting
 
             if (keyboardService.IsKeyDown("space"))
             {
-                bullet.AddPlayerBullet(player);
+                safetyOne = true;
             }
+
+            if (keyboardService.IsKeyUp("space"))
+            {
+                if (safetyOne)
+                {
+                    bullet.AddPlayerBullet(player);
+                    safetyOne = false;
+                }
+            }
+
+
 
             foreach (Actor alien in alienList)
             {
+                Point alienPosition = alien.GetPosition();
+                int ax = alienPosition.GetX();
+                int ay = alienPosition.GetY();
                 if (modulus == 60 || modulus == 120)
                 {
-                    alien.SetVelocity(new Point(15, 0));
+                    alien.SetPosition(new Point(ax + 15, ay));
                 }
                 if (modulus == 30 || modulus == 90)
                 {
-                    alien.SetVelocity(new Point(0, 15));
+                    alien.SetPosition(new Point(ax, ay + 15));
                 }
                 if (modulus == 0 || modulus == 150)
                 {
-                    alien.SetVelocity(new Point(-15, 0));
+                    alien.SetPosition(new Point(ax - 15, ay));
                 }
 
             }
