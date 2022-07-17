@@ -1,9 +1,11 @@
-# Robot Finds Kitten
-Simon Carless once described robotfindskitten as "less a game and more a way of 
-life ... It's fun to wander around until you find a kitten, at which point you feel 
-happy and can start again". I don't think I could have said it better myself!
+# Space Invaders
+Kill all the aliens before they touch down! Be sure to avoid their lasers.
+You only have three lives!
 
----
+## How To Play
+Due to programming issues the user has a set firerate but unlimited ammo.
+Use the arrow keys to move back and forth.
+
 ## Getting Started
 Make sure you have dotnet 6.0 or newer installed on your machine. Open 
 a terminal and browse to the project's root folder. Start the program 
