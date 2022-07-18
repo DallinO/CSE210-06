@@ -6,7 +6,7 @@ using System;
 
 namespace Unit05.Game.Casting
 {
-    class Bullet : Actor
+    public class Bullet : Actor
     {
         List<Actor> liveRounds = new List<Actor>();
         public Bullet()
