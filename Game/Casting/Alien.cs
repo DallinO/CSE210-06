@@ -3,7 +3,7 @@ using Raylib_cs;
 
 namespace Unit05.Game.Casting
 {
-    public class Alien : Actor
+    public class Alien : Bullet
     {
         List<Actor> alienList = new List<Actor>();
         int alienAmount = 32;

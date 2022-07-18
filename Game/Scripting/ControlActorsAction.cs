@@ -35,8 +35,6 @@ namespace Unit05.Game.Scripting
             Alien aliens = (Alien)cast.GetFirstActor("Aliens");
             List<Actor> alienList = aliens.GetAlienList();
             int modulus = iteration % 180;
-            bool safetyOne = false;
-            bool safetyTwo = false;
 
             // left
             if (keyboardService.IsKeyDown("left"))
@@ -52,20 +50,6 @@ namespace Unit05.Game.Scripting
 
             Player player = (Player)cast.GetFirstActor("Player");
             player.SetPosition(direction);
-
-            if (keyboardService.IsKeyDown("space"))
-            {
-                safetyOne = true;
-            }
-
-            if (keyboardService.IsKeyUp("space"))
-            {
-                if (safetyOne)
-                {
-                    bullet.AddPlayerBullet(player);
-                    safetyOne = false;
-                }
-            }
 
 
 

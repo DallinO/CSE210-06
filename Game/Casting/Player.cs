@@ -3,7 +3,7 @@ using Raylib_cs;
 
 namespace Unit05.Game.Casting
 {
-    public class Player : Actor
+    public class Player : Bullet
     {
         int lives = 3;
         public Player()

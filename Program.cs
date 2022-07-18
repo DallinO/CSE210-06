@@ -63,7 +63,7 @@ namespace Unit05
             script.AddAction("update", new UpdateLivesAction());
             script.AddAction("update", new UpdateScoreAction());
             script.AddAction("update", new HandleBulletCollision());
-            script.AddAction("update", new FireAlienBullet());
+            script.AddAction("update", new FireBullet());
             script.AddAction("update", new HandleGameOver());
             script.AddAction("output", new DrawActorsAction(videoService));
 
