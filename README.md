@@ -24,8 +24,9 @@ arrow or "start debugging" button.
 The project files and folders are organized as follows:
 ```
 root                    (project root folder)
-+-- Game                (source code folder)
-+-- Program.cs          (program entry point)    
++-- Game                (class source code folder)
++-- Program.cs          (program entry point)  
++-- Constants.cs        (holds variables with constant values)
 +-- README.md           (general info)
 +-- Unit04.csproj       (dotnet project file)
 ```
@@ -35,5 +36,4 @@ root                    (project root folder)
 * raylib-cs 3.7.0.1
 
 ## Authors
-* Matt Manley (manleym@byui.edu)
-* Scott Burton (burtons@byui.edu)
+Dallin Olson
