@@ -61,9 +61,12 @@ namespace Unit05.Game.Casting
             alienAmount = alienAmount - input;
         }
 
-        public int GetAlienAmount()
+        public override void MoveNext()
         {
-            return alienAmount;
+            foreach (Actor alien in alienList)
+            {
+                alien.MoveNext();
+            }
         }
     }
 }

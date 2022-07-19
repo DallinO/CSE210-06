@@ -51,8 +51,6 @@ namespace Unit05.Game.Scripting
             Player player = (Player)cast.GetFirstActor("Player");
             player.SetPosition(direction);
 
-
-
             foreach (Actor alien in alienList)
             {
                 Point alienPosition = alien.GetPosition();
